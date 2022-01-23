@@ -1,4 +1,4 @@
-package com.example.learneng.framework.ui
+package com.example.learneng.framework.ui.search_fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
