@@ -2,7 +2,7 @@ package com.example.learneng.framework.ui.search_fragment.presenter
 
 import com.example.dictionaryengapp.interactors.IMainInteractor
 import com.example.learneng.interactors.MainInteractorImpl
-import com.example.dictionaryengapp.model.data.AppState
+import com.example.learneng.model.data.AppState
 import com.example.learneng.framework.rx.ISchedulerProvider
 import com.example.learneng.framework.rx.SchedulerProvider
 import com.example.learneng.framework.ui.base.MainContract
@@ -34,8 +34,8 @@ class SearchPresenterImpl: SearchPresenter{
 
     override fun search(word: String) {
         interactor.getData(word)
-            .observeOn(schedulerProvider.io)
-            .subscribeOn(schedulerProvider.ui)
+            .subscribeOn(schedulerProvider.io)
+            .observeOn(schedulerProvider.ui)
             .doOnSubscribe {
                 view?.setState(AppState.Loading(null))
             }
