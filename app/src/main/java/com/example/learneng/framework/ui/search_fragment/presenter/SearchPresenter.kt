@@ -5,6 +5,6 @@ import com.example.learneng.framework.ui.base.MainContract
 
 
 
-interface SearchPresenter<T : AppState, V : MainContract.View> : MainContract.Presenter<T, V>{
+interface SearchPresenter : MainContract.Presenter{
     fun search(word : String)
 }

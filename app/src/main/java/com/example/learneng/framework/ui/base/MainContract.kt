@@ -6,9 +6,8 @@ class MainContract {
     interface View {
         fun setState(state : AppState)
     }
-
-    interface Presenter<T : AppState, V : View> {
-        fun attachView(v : V)
-        fun detachView(v : V)
+    interface Presenter {
+        fun attachView(v : View)
+        fun detachView(v : View)
     }
 }

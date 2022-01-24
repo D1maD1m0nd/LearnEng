@@ -1,9 +1,9 @@
-package com.example.learneng.model.repository
+package com.example.dictionaryengapp.interactors
 
 import com.example.dictionaryengapp.model.data.DataModel
 import io.reactivex.rxjava3.core.Single
 
 
-interface IRepository {
+interface IMainInteractor {
     fun getData(word : String) : Single<List<DataModel>>
 }
