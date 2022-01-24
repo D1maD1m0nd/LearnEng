@@ -3,7 +3,7 @@ package com.example.learneng.framework.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.dictionaryengapp.model.data.DataModel
+import com.example.learneng.model.data.DataModel
 import com.example.learneng.R
 import com.example.learneng.databinding.LangItemBinding
 import com.mikepenz.fastadapter.binding.AbstractBindingItem

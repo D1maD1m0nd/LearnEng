@@ -1,5 +1,6 @@
-package com.example.dictionaryengapp.model.data
+package com.example.learneng.model.data
 
+import com.example.dictionaryengapp.model.data.Meanings
 import com.squareup.moshi.Json
 
 class DataModel(

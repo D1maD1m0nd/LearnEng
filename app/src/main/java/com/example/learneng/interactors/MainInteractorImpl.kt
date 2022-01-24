@@ -1,7 +1,7 @@
 package com.example.learneng.interactors
 
 import com.example.dictionaryengapp.interactors.IMainInteractor
-import com.example.dictionaryengapp.model.data.DataModel
+import com.example.learneng.model.data.DataModel
 import com.example.learneng.model.repository.IRepository
 import io.reactivex.rxjava3.core.Single
 

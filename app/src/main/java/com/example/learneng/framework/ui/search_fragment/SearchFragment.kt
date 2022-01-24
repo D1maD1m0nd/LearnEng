@@ -47,7 +47,8 @@ class SearchFragment : Fragment(), MainContract.View {
 
     private fun initView() = with(binding) {
         binding.textInputLayout.setEndIconOnClickListener{
-            presenter.search("вода")
+            val query = queryTextInputLayout.text.toString()
+            presenter.search(query)
         }
         binding.translateRcView.layoutManager = LinearLayoutManager(
             context,

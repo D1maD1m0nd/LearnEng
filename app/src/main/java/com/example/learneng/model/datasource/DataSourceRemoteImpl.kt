@@ -1,6 +1,6 @@
 package com.example.learneng.model.datasource
 
-import com.example.dictionaryengapp.model.data.DataModel
+import com.example.learneng.model.data.DataModel
 import io.reactivex.rxjava3.core.Single
 
 class DataSourceRemoteImpl(private val remoteProvider : RetrofitImplementation = RetrofitImplementation()) : DataSource {

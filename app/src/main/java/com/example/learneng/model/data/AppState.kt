@@ -1,7 +1,5 @@
 package com.example.learneng.model.data
 
-import com.example.dictionaryengapp.model.data.DataModel
-
 sealed class AppState {
 
     data class Success(val data: List<DataModel>) : AppState()

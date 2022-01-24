@@ -1,6 +1,6 @@
 package com.example.dictionaryengapp.interactors
 
-import com.example.dictionaryengapp.model.data.DataModel
+import com.example.learneng.model.data.DataModel
 import io.reactivex.rxjava3.core.Single
 
 
