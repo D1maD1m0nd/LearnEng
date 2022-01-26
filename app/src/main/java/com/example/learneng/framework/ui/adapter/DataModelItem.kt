@@ -25,10 +25,15 @@ open class DataModelItem(private val dataModel: DataModel) :  AbstractBindingIte
 
     override fun bindView(binding: LangItemBinding, payloads: List<Any>) {
         binding.translateTextView.text = dataModel.text
+        binding.ruTextView.text = dataModel.meanings?.firstOrNull()?.translation?.translation
+        val transcription = "[${dataModel.meanings?.firstOrNull()?.transcription}]"
+        binding.transcriptionTextView.text = transcription
     }
 
     override fun unbindView(binding: LangItemBinding) {
         binding.translateTextView.text = null
+        binding.ruTextView.text = null
+        binding.transcriptionTextView.text = null
     }
 
 
