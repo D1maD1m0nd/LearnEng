@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.learneng.model.data.AppState
 import com.example.learneng.databinding.FragmentSearchBinding
-import com.example.learneng.framework.ui.adapter.DataModelItem
+import com.example.learneng.framework.ui.search_fragment.adapter.DataModelItem
 import com.example.learneng.framework.ui.search_fragment.viewModel.SearchViewModel
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter

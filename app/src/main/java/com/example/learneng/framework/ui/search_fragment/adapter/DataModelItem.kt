@@ -1,4 +1,4 @@
-package com.example.learneng.framework.ui.adapter
+package com.example.learneng.framework.ui.search_fragment.adapter
 
 
 import android.view.LayoutInflater
