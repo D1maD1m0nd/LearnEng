@@ -2,6 +2,7 @@ package com.example.learneng.App
 
 import android.app.Application
 import com.example.learneng.di.AppComponent
+import com.example.learneng.di.AppModule
 import com.example.learneng.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -21,6 +22,7 @@ class App : Application(), HasAndroidInjector {
         DaggerAppComponent
             .builder()
             .application(this)
+            .appModule(AppModule(this))
             .build()
             .inject(this)
     }

@@ -1,5 +1,6 @@
 package com.example.learneng.framework.ui.search_fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,9 @@ import com.example.learneng.framework.ui.search_fragment.viewModel.SearchViewMod
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
+import dagger.android.AndroidInjection
+import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
 
 
 class SearchFragment : Fragment() {
@@ -23,11 +27,17 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
     private val dataModelItemAdapter = ItemAdapter<DataModelItem>()
     private val dataModelFastAdapter = FastAdapter.with(dataModelItemAdapter)
+
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: SearchViewModel by lazy {
-        ViewModelProvider.NewInstanceFactory().create(SearchViewModel::class.java)
+        viewModelFactory.create(SearchViewModel::class.java)
     }
     private val observer = Observer<AppState> { setState(it) }
-
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

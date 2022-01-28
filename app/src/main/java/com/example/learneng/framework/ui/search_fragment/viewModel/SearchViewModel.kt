@@ -8,11 +8,9 @@ import com.example.learneng.model.data.AppState
 import com.example.learneng.model.datasource.DataSourceRemoteImpl
 import com.example.learneng.model.repository.RepositoryImpl
 import io.reactivex.rxjava3.observers.DisposableObserver
+import javax.inject.Inject
 
-class SearchViewModel (
-    private val interactor : IMainInteractor<AppState> = MainInteractorImpl(
-        RepositoryImpl(DataSourceRemoteImpl())
-    )) : BaseViewModel<AppState>() {
+class SearchViewModel  @Inject constructor(private val interactor: MainInteractorImpl) : BaseViewModel<AppState>() {
     private var appState : AppState? = null
 
     override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {

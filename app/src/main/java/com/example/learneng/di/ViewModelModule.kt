@@ -13,7 +13,7 @@ import kotlin.reflect.KClass
 abstract class ViewModelModule {
 
     @Binds
-    internal abstract fun bindViewModelFactory(fractory : ViewModelFactory) : ViewModelProvider.Factory
+    internal abstract fun bindViewModelFactory(factory : ViewModelFactory) : ViewModelProvider.Factory
 
     @Binds
     @IntoMap
