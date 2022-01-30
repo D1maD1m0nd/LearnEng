@@ -5,5 +5,5 @@ import io.reactivex.rxjava3.core.Single
 
 
 interface IRepository {
-    fun getData(word : String) : Single<List<DataModel>>
+    fun getData(word: String): Single<List<DataModel>>
 }

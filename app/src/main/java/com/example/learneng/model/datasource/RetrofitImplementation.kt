@@ -22,7 +22,7 @@ class RetrofitImplementation : DataSource {
     }
 
 
-    private fun createRetrofit(interceptor: Interceptor) : Retrofit {
+    private fun createRetrofit(interceptor: Interceptor): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL_LOCATIONS)
             .addConverterFactory(MoshiConverterFactory.create())

@@ -8,11 +8,11 @@ import com.example.learneng.model.data.AppState
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 abstract class BaseViewModel<T : AppState>(
-    val liveDataToObserve : MutableLiveData<T> = MutableLiveData(),
+    val liveDataToObserve: MutableLiveData<T> = MutableLiveData(),
     val compositeDisposable: CompositeDisposable = CompositeDisposable(),
     val schedulerProvider: SchedulerProvider = SchedulerProvider()
-) : ViewModel(){
-    open fun getData(word : String, isOnline : Boolean) : LiveData<T> = liveDataToObserve
+) : ViewModel() {
+    open fun getData(word: String, isOnline: Boolean): LiveData<T> = liveDataToObserve
 
     override fun onCleared() {
         super.onCleared()

@@ -7,6 +7,6 @@ import io.reactivex.rxjava3.core.Single
 
 class RepositoryImpl(private val dataSource: DataSource) : IRepository {
     override fun getData(word: String): Single<List<DataModel>> {
-        return  dataSource.getData(word)
+        return dataSource.getData(word)
     }
 }

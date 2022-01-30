@@ -1,26 +1,21 @@
 package com.example.learneng.framework.ui.search_fragment
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.learneng.model.data.AppState
 import com.example.learneng.databinding.FragmentSearchBinding
 import com.example.learneng.framework.ui.search_fragment.adapter.DataModelItem
 import com.example.learneng.framework.ui.search_fragment.viewModel.SearchViewModel
+import com.example.learneng.model.data.AppState
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
-import dagger.android.AndroidInjection
-import dagger.android.support.AndroidSupportInjection
-import javax.inject.Inject
-
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
@@ -28,16 +23,8 @@ class SearchFragment : Fragment() {
     private val dataModelItemAdapter = ItemAdapter<DataModelItem>()
     private val dataModelFastAdapter = FastAdapter.with(dataModelItemAdapter)
 
-    @Inject
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: SearchViewModel by lazy {
-        viewModelFactory.create(SearchViewModel::class.java)
-    }
+    private val viewModel: SearchViewModel by viewModel()
     private val observer = Observer<AppState> { setState(it) }
-    override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +40,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun initView() = with(binding) {
-        binding.textInputLayout.setEndIconOnClickListener{
+        binding.textInputLayout.setEndIconOnClickListener {
             val query = queryTextInputLayout.text.toString()
             viewModel.getData(query, true).observe(viewLifecycleOwner, observer)
         }
@@ -62,14 +49,14 @@ class SearchFragment : Fragment() {
             LinearLayoutManager.VERTICAL,
             false
         )
-        binding.translateRcView.adapter =  dataModelFastAdapter
+        binding.translateRcView.adapter = dataModelFastAdapter
     }
 
 
-
     private fun setState(state: AppState) {
-        when(state) {
-            is AppState.Error -> Toast.makeText(context, state.error.message, Toast.LENGTH_SHORT).show()
+        when (state) {
+            is AppState.Error -> Toast.makeText(context, state.error.message, Toast.LENGTH_SHORT)
+                .show()
             is AppState.Loading -> {}
             is AppState.Success -> {
                 FastAdapterDiffUtil[dataModelItemAdapter] = state.data.map(::DataModelItem)
