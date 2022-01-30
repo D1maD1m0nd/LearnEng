@@ -7,13 +7,21 @@ import com.example.learneng.model.datasource.RetrofitImplementation
 import com.example.learneng.model.repository.IRepository
 import com.example.learneng.model.repository.RepositoryImpl
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.androidx.viewmodel.scope.viewModel
+
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 
 var application = module {
-    single<IRepository>(named(NAME_REMOTE)) { RepositoryImpl(get(qualifier = named(NAME_DATASOURCE_REMOTE))) }
+    single<IRepository>(named(NAME_REMOTE)) {
+        RepositoryImpl(
+            get(
+                qualifier = named(
+                    NAME_DATASOURCE_REMOTE
+                )
+            )
+        )
+    }
 
     single<DataSource>(named(NAME_DATASOURCE_REMOTE)) { RetrofitImplementation() }
 }

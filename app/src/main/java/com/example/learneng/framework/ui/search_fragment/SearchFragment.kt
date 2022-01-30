@@ -36,13 +36,14 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.liveDataToObserve.observe(viewLifecycleOwner, observer)
         initView()
     }
 
     private fun initView() = with(binding) {
         binding.textInputLayout.setEndIconOnClickListener {
             val query = queryTextInputLayout.text.toString()
-            viewModel.getData(query, true).observe(viewLifecycleOwner, observer)
+            viewModel.getData(query, true)
         }
         binding.translateRcView.layoutManager = LinearLayoutManager(
             context,
@@ -59,7 +60,9 @@ class SearchFragment : Fragment() {
                 .show()
             is AppState.Loading -> {}
             is AppState.Success -> {
-                FastAdapterDiffUtil[dataModelItemAdapter] = state.data.map(::DataModelItem)
+                state.data?.let {
+                    FastAdapterDiffUtil[dataModelItemAdapter] = it.map(::DataModelItem)
+                }
             }
         }
     }

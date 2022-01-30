@@ -1,20 +1,18 @@
 package com.example.learneng.model.datasource
 
+
 import com.example.dictionaryengapp.BaseInterceptor
 import com.example.learneng.model.data.DataModel
-import io.reactivex.rxjava3.core.Single
-
-
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class RetrofitImplementation : DataSource {
-    override fun getData(word: String): Single<List<DataModel>> {
-        return getService(BaseInterceptor.interceptor).search(word)
+    override suspend fun getData(word: String): List<DataModel> {
+        return getService(BaseInterceptor.interceptor).search(word).await()
     }
 
     private fun getService(interceptor: Interceptor): ApiService {
@@ -26,7 +24,7 @@ class RetrofitImplementation : DataSource {
         return Retrofit.Builder()
             .baseUrl(BASE_URL_LOCATIONS)
             .addConverterFactory(MoshiConverterFactory.create())
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(createOkHttpClient(interceptor))
             .build()
     }

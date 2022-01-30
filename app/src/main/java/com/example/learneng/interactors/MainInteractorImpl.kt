@@ -2,13 +2,12 @@ package com.example.learneng.interactors
 
 import com.example.learneng.model.data.AppState
 import com.example.learneng.model.repository.IRepository
-import io.reactivex.rxjava3.core.Single
 
 
-class MainInteractorImpl (
+class MainInteractorImpl(
     val repo: IRepository,
-    ) : IMainInteractor<AppState> {
-    override fun getData(word: String, isOnline: Boolean): Single<AppState> {
-        return repo.getData(word).map { AppState.Success(it) }
+) : IMainInteractor<AppState> {
+    override suspend fun getData(word: String, isOnline: Boolean): AppState {
+        return AppState.Success(repo.getData(word))
     }
 }

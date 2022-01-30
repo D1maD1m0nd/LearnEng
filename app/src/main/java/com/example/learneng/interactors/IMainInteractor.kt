@@ -1,8 +1,8 @@
 package com.example.learneng.interactors
 
-import io.reactivex.rxjava3.core.Single
+import com.example.learneng.model.data.AppState
 
 
-interface IMainInteractor<T> {
-    fun getData(word: String, isOnline: Boolean): Single<T>
+interface IMainInteractor<T : AppState> {
+    suspend fun getData(word: String, isOnline: Boolean): T
 }
