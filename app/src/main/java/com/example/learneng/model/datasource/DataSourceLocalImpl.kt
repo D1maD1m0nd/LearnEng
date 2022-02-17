@@ -13,6 +13,11 @@ class DataSourceLocalImpl(private val dao: HistoryDao) : DataSourceLocal {
         }
     }
 
+    override suspend fun getDataById(id: Int) : DataModel {
+        val entity = dao.getWordById(id)
+        return entity.convertToDataModel()
+    }
+
     override suspend fun getData(word: String): List<DataModel> {
         val list = dao.all()
         return list.map {

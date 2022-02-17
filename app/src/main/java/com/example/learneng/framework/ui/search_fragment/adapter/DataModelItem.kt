@@ -8,7 +8,7 @@ import com.example.learneng.databinding.LangItemBinding
 import com.example.learneng.model.data.DataModel
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-open class DataModelItem(private val dataModel: DataModel) :
+open class DataModelItem(val dataModel: DataModel) :
     AbstractBindingItem<LangItemBinding>() {
 
 
@@ -25,12 +25,14 @@ open class DataModelItem(private val dataModel: DataModel) :
         return LangItemBinding.inflate(inflater, parent, false)
     }
 
+
     override fun bindView(binding: LangItemBinding, payloads: List<Any>) {
         binding.translateTextView.text = dataModel.text
         binding.ruTextView.text = dataModel.meanings?.firstOrNull()?.translation?.translation
         val transcription = "[${dataModel.meanings?.firstOrNull()?.transcription}]"
         binding.transcriptionTextView.text = transcription
     }
+
 
     override fun unbindView(binding: LangItemBinding) {
         binding.translateTextView.text = null

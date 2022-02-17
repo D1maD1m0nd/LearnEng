@@ -8,4 +8,8 @@ class HistoryViewModel(interactor : IMainInteractor<AppState>) : BaseViewModel<A
     override fun getData(word: String, isOnline: Boolean) {
         TODO("Not yet implemented")
     }
+
+    override fun getData(id: Int) {
+        TODO("Not yet implemented")
+    }
 }

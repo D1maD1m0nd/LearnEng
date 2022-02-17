@@ -1,8 +1,7 @@
 package com.example.learneng.utils
 
-import com.example.learneng.model.data.AppState
-import com.example.learneng.model.data.DataModel
-import com.example.learneng.model.data.HistoryEntity
+import com.example.learneng.model.data.*
+import kotlin.random.Random
 
 
 fun AppState.convertToHistoryEntity() : List<HistoryEntity>? =
@@ -26,5 +25,7 @@ fun AppState.convertToHistoryEntity() : List<HistoryEntity>? =
     }
 
 fun HistoryEntity.convertToDataModel() : DataModel{
-    return DataModel(this.id, text = this.word, null)
+
+    val list = listOf(Meanings(Random.nextInt(), Translation(this.translation), this.imageUrl, this.transcription, this.soundUrl))
+    return DataModel(this.id, text = this.word, list)
 }

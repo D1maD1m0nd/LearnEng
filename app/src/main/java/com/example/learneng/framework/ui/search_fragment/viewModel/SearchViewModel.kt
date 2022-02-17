@@ -15,7 +15,7 @@ class SearchViewModel(private val interactor: MainInteractorImpl) : BaseViewMode
             kotlin.runCatching {
                 interactor.getData(word, isOnline)
             }.onSuccess {
-                liveDataToObserve.postValue(interactor.getData(word, isOnline))
+                liveDataToObserve.postValue(it)
             }.onFailure {
                 liveDataToObserve.postValue(AppState.Error(it))
             }
@@ -26,5 +26,9 @@ class SearchViewModel(private val interactor: MainInteractorImpl) : BaseViewMode
     override fun onCleared() {
         liveDataToObserve.value = AppState.Success(null)
         super.onCleared()
+    }
+
+    override fun getData(id: Int) {
+
     }
 }

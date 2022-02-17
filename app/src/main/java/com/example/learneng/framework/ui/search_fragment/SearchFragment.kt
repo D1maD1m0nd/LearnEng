@@ -8,7 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.learneng.R
 import com.example.learneng.databinding.FragmentSearchBinding
+import com.example.learneng.framework.ui.description_fragment.DescriptionFragment
 import com.example.learneng.framework.ui.search_fragment.adapter.DataModelItem
 import com.example.learneng.framework.ui.search_fragment.viewModel.SearchViewModel
 import com.example.learneng.model.data.AppState
@@ -42,7 +44,7 @@ class SearchFragment : Fragment() {
 
     private fun initView() = with(binding) {
         binding.textInputLayout.setEndIconOnClickListener {
-            val query = queryTextInputLayout.text.toString()
+            val query = queryTextInputLayout.text.toString().trim()
             viewModel.getData(query, true)
         }
         binding.translateRcView.layoutManager = LinearLayoutManager(
@@ -62,6 +64,15 @@ class SearchFragment : Fragment() {
             is AppState.Success -> {
                 state.data?.let {
                     FastAdapterDiffUtil[dataModelItemAdapter] = it.map(::DataModelItem)
+                    dataModelFastAdapter.onClickListener = { _, _, item, _ ->
+                        requireActivity()
+                            .supportFragmentManager
+                            .beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.fragment_container,DescriptionFragment.newInstance(item.dataModel.id))
+                            .commit()
+                        false
+                    }
                 }
             }
         }

@@ -12,4 +12,8 @@ class RepositoryLocalImpl(private val dataSource: DataSourceLocal) : IRepository
     override suspend fun saveToDB(appState: AppState) {
         dataSource.saveToDB(appState)
     }
+
+    override suspend fun getDataById(id: Int) : DataModel {
+        return dataSource.getDataById(id)
+    }
 }
