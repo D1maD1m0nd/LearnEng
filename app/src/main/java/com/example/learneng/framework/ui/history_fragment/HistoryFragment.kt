@@ -5,56 +5,73 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.learneng.R
+import com.example.learneng.databinding.FragmentHistoryBinding
+import com.example.learneng.framework.ui.description_fragment.DescriptionFragment
+import com.example.learneng.framework.ui.history_fragment.adapter.DataModelHistoryItem
+import com.example.learneng.framework.ui.history_fragment.viewModel.HistoryViewModel
+import com.example.learneng.model.data.AppState
+import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HistoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HistoryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val dataModelItemAdapter = ItemAdapter<DataModelHistoryItem>()
+    private val dataModelFastAdapter = FastAdapter.with(dataModelItemAdapter)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val viewModel: HistoryViewModel by viewModel()
+
+    private var _binding : FragmentHistoryBinding? = null
+    private val binding get() = _binding!!
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false)
+    ): View {
+        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
+        viewModel.liveDataToObserve.observe(viewLifecycleOwner){
+            setState(it)
+        }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.translateRcView.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        binding.translateRcView.adapter = dataModelFastAdapter
+        viewModel.getHistory()
+    }
+    private fun setState(state: AppState) {
+        when(state) {
+            is AppState.Error -> {}
+            is AppState.Loading -> {}
+            is AppState.Success -> {
+                state.data?.let {
+                    FastAdapterDiffUtil[dataModelItemAdapter] = it.map(::DataModelHistoryItem)
+                    dataModelFastAdapter.onClickListener = { _, _, item, _ ->
+                        requireActivity()
+                            .supportFragmentManager
+                            .beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.fragment_container, DescriptionFragment.newInstance(item.dataModel.id))
+                            .commit()
+                        false
+                    }
+                }
+            }
+        }
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HistoryFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HistoryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = HistoryFragment()
     }
 }

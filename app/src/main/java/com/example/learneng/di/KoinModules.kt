@@ -4,10 +4,7 @@ import androidx.room.Room
 import com.example.learneng.framework.ui.description_fragment.viewModel.DescriptionViewModel
 import com.example.learneng.framework.ui.history_fragment.viewModel.HistoryViewModel
 import com.example.learneng.framework.ui.search_fragment.viewModel.SearchViewModel
-import com.example.learneng.interactors.DescriptionInteractor
-import com.example.learneng.interactors.HistoryInteractorImpl
-import com.example.learneng.interactors.IDescriptionInteractor
-import com.example.learneng.interactors.MainInteractorImpl
+import com.example.learneng.interactors.*
 import com.example.learneng.model.datasource.DataSource
 import com.example.learneng.model.datasource.DataSourceLocal
 import com.example.learneng.model.datasource.DataSourceLocalImpl
@@ -64,12 +61,12 @@ var descriptionScreen = module {
         DescriptionViewModel(get())
     }
 }
-//val historyScreen = module {
-//
-//    viewModel {
-//        HistoryViewModel(get())
-//    }
-//    factory { HistoryInteractorImpl(get(
-//        named(NAME_LOCAL)
-//    )) }
-//}
+val historyScreen = module {
+
+    viewModel {
+        HistoryViewModel(get())
+    }
+    factory<IHistoryInteractor> { HistoryInteractorImpl(get(
+        named(NAME_LOCAL)
+    )) }
+}

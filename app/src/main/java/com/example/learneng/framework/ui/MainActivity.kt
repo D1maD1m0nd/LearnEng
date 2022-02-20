@@ -22,10 +22,9 @@ class MainActivity : AppCompatActivity() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.action_history -> {
-
                     supportFragmentManager
                         .beginTransaction()
-                        .replace(binding.fragmentContainer.id,HistoryFragment.newInstance("1","2"))
+                        .replace(binding.fragmentContainer.id,HistoryFragment.newInstance())
                         .addToBackStack(null)
                         .commit()
                     // Handle edit text press

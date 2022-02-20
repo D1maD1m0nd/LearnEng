@@ -39,6 +39,4 @@ open class DataModelItem(val dataModel: DataModel) :
         binding.ruTextView.text = null
         binding.transcriptionTextView.text = null
     }
-
-
 }
