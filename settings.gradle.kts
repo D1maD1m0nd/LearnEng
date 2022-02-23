@@ -5,5 +5,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+include(":app")
 rootProject.name = "LearnEng"
-include ':app'
+

@@ -1,4 +1,8 @@
 object Versions {
+
+    const val gradle = "7.1.1"
+    const val kotlinGradle = "1.6.10"
+
     const val retrofit = "2.9.0"
     const val okHttp = "4.9.2"
     const val retrofitCoroutinesAdapter = "0.9.2"
@@ -12,7 +16,7 @@ object Versions {
 
     const val coroutines = "1.5.2"
 
-    const val coil = "1.4.0'"
+    const val coil = "1.4.0"
 
     //Room
     const val roomKtx = "2.4.1"
