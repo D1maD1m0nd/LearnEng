@@ -6,13 +6,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(AppConfig.compileSdk)
-    buildToolsVersion(AppConfig.buildToolsVersion)
+    compileSdk = AppConfig.compileSdk
 
     defaultConfig {
         applicationId = "com.example.learneng"
-        minSdkVersion(AppConfig.minSdk)
-        targetSdkVersion(AppConfig.targetSdk)
+        minSdk = AppConfig.minSdk
+        targetSdk = AppConfig.targetSdk
         versionCode = AppConfig.versionCode
         versionName = AppConfig.versionName
 
