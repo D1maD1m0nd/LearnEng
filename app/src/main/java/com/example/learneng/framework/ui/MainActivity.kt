@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.topAppBar.setNavigationOnClickListener {
-            // Handle navigation icon press
+
             supportFragmentManager.popBackStack()
         }
 
