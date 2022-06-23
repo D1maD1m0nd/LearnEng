@@ -9,4 +9,5 @@ abstract class BaseViewModel<T : AppState>(
 ) : ViewModel() {
 
     abstract fun getData(word: String, isOnline: Boolean)
+    abstract fun getData(id: Int)
 }
