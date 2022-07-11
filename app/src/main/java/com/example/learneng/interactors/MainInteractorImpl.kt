@@ -1,19 +1,18 @@
 package com.example.learneng.interactors
 
-import com.example.learneng.di.NAME_REMOTE
 import com.example.learneng.model.data.AppState
-import com.example.learneng.model.data.DataModel
 import com.example.learneng.model.repository.IRepository
-import io.reactivex.rxjava3.core.Single
-import javax.inject.Inject
-import javax.inject.Named
+import com.example.learneng.model.repository.IRepositoryLocal
 
 
-class MainInteractorImpl@Inject constructor(
-    @Named(NAME_REMOTE) val repo: IRepository,
-
+class MainInteractorImpl(
+    val repo: IRepository,
+    val repoLocal: IRepositoryLocal,
 ) : IMainInteractor<AppState> {
-    override fun getData(word: String, isOnline: Boolean): Single<AppState> {
-        return repo.getData(word).map { AppState.Success(it) }
+    override suspend fun getData(word: String, isDb: Boolean): AppState {
+
+        val state = AppState.Success(repo.getData(word))
+        repoLocal.saveToDB(state)
+        return state
     }
 }

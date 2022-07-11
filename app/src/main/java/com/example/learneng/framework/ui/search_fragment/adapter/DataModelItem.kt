@@ -3,12 +3,13 @@ package com.example.learneng.framework.ui.search_fragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.learneng.model.data.DataModel
 import com.example.learneng.R
 import com.example.learneng.databinding.LangItemBinding
+import com.example.learneng.model.data.DataModel
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 
-open class DataModelItem(private val dataModel: DataModel) :  AbstractBindingItem<LangItemBinding>() {
+open class DataModelItem(val dataModel: DataModel) :
+    AbstractBindingItem<LangItemBinding>() {
 
 
     override var identifier: Long
@@ -18,10 +19,12 @@ open class DataModelItem(private val dataModel: DataModel) :  AbstractBindingIte
     override val type: Int
         get() = R.id.translate_rc_view
 
-    override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?
+    override fun createBinding(
+        inflater: LayoutInflater, parent: ViewGroup?
     ): LangItemBinding {
         return LangItemBinding.inflate(inflater, parent, false)
     }
+
 
     override fun bindView(binding: LangItemBinding, payloads: List<Any>) {
         binding.translateTextView.text = dataModel.text
@@ -30,12 +33,10 @@ open class DataModelItem(private val dataModel: DataModel) :  AbstractBindingIte
         binding.transcriptionTextView.text = transcription
     }
 
+
     override fun unbindView(binding: LangItemBinding) {
         binding.translateTextView.text = null
         binding.ruTextView.text = null
         binding.transcriptionTextView.text = null
     }
-
-
-
 }
